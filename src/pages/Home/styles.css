@@ -2,3 +2,10 @@
   height: 100vh;
   display: flex;
 }
+.content__main {
+  width: calc(100vw - 220px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
