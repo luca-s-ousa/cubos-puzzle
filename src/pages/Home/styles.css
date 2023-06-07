@@ -1,3 +1,4 @@
 .container__app {
   height: 100vh;
+  display: flex;
 }
