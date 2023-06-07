@@ -1,0 +1,15 @@
+.btn__reset {
+  all: unset;
+  box-sizing: border-box;
+  width: 150px;
+  height: 50px;
+  border-radius: 6px;
+  background-color: #f0c551;
+  color: #fff;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+
+.btn__reset:hover {
+  transition: 0.4s;
+}
