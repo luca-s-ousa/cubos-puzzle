@@ -1,0 +1,8 @@
+.container__logo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 1.9rem;
+}
