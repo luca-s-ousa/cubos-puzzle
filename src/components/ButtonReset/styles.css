@@ -1,6 +1,8 @@
 .btn__reset {
   all: unset;
   box-sizing: border-box;
+  cursor: pointer;
+  text-align: center;
   width: 150px;
   height: 50px;
   border-radius: 6px;
@@ -12,4 +14,5 @@
 
 .btn__reset:hover {
   transition: 0.4s;
+  background-color: #c8a74b;
 }
