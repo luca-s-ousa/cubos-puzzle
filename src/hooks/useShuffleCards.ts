@@ -1,50 +1,42 @@
 import letters from "../data/Cards";
 import { useEffect } from "react";
 import { Letter } from "../types/Letter";
+import { useState } from "react";
 
 type Props = {
   restart?: boolean;
 };
 
 const useShuffleCards = ({ restart }: Props) => {
-  let localLetters: Letter[] = [];
-  let generatedNumbers: number[] = [];
-  let landedNumber: number = -2;
+  const [lettersGlobal, setLettersGlobal] = useState<Letter[]>([]);
 
-  function handleRandomNumber() {
-    const min = 1;
-    const max = 12;
-
-    const numberGenerate = Math.floor(Math.random() * (max - min + 1)) + min;
-
-    return numberGenerate;
+  function handleRandomNumber(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   useEffect(() => {
-    while (localLetters.length !== letters.length) {
-      landedNumber = handleRandomNumber();
+    const min = 1;
+    const max = 12;
+    const localLetters: Letter[] = [];
+    const generatedNumbers: number[] = [];
+
+    while (localLetters.length < letters.length) {
+      const landedNumber = handleRandomNumber(min, max);
       if (!generatedNumbers.includes(landedNumber)) {
         const findLetter = letters.find((letter) => letter.id === landedNumber);
-        localLetters.push(findLetter!);
-        generatedNumbers.push(landedNumber);
+        if (findLetter) {
+          localLetters.push(findLetter);
+          generatedNumbers.push(landedNumber);
+        }
       }
     }
 
     console.log(localLetters);
-
-    // letters.map((letter) => {
-    //   if (
-    //     !generatedNumbers.includes(landedNumber) &&
-    //     landedNumber === letter.id
-    //   ) {
-    //     localLetters.push(letter);
-    //     generatedNumbers.push(landedNumber);
-    //   }
-    // });
+    setLettersGlobal(localLetters);
   }, [restart]);
 
   return {
-    localLetters,
+    lettersGlobal,
   };
 };
 
