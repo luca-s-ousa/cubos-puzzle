@@ -8,16 +8,18 @@ type Props = {
 };
 
 const useShuffleCards = ({ restart }: Props) => {
-  const [lettersGlobal, setLettersGlobal] = useState<Letter[]>([]);
+  const [cancelled, setCancelled] = useState(false);
+
+  // const [lettersGlobal, setLettersGlobal] = useState<Letter[]>([]);
+  const localLetters: Letter[] = [];
 
   function handleRandomNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  useEffect(() => {
+  function handleShuffleCards() {
     const min = 1;
     const max = 12;
-    const localLetters: Letter[] = [];
     const generatedNumbers: number[] = [];
 
     while (localLetters.length < letters.length) {
@@ -31,12 +33,17 @@ const useShuffleCards = ({ restart }: Props) => {
       }
     }
 
-    console.log(localLetters);
-    setLettersGlobal(localLetters);
-  }, [restart]);
+    // console.log(localLetters);
+
+    return localLetters;
+  }
+
+  useEffect(() => {
+    return () => setCancelled(true);
+  }, []);
 
   return {
-    lettersGlobal,
+    handleShuffleCards,
   };
 };
 

@@ -1,12 +1,20 @@
 import "./styles.css";
 import { Letter } from "../../types/Letter";
 
-const LetterComponent = ({ id, backImg, notTurnedImg, turn }: Letter) => {
+type Props = {
+  letter: Letter;
+  onClick: (letter: Letter) => void;
+};
+
+const LetterComponent = ({ letter, onClick }: Props) => {
+  const { id, turn, backImg, notTurnedImg } = letter;
+
   return (
     <img
       src={turn ? backImg : notTurnedImg}
       className="img__letter"
       alt="img letter"
+      onClick={() => onClick(letter)}
     />
   );
 };
