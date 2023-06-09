@@ -5,12 +5,14 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 import { Letter } from "../../types/Letter";
 import useGameFunctions from "../../hooks/useGameFunctions";
+import WinImg from "../../assets/congrats.svg";
 
 const Letters = () => {
   const { handleShuffleCards } = useShuffleCards({});
   const { turnCard } = useGameFunctions();
 
   const { lettersGlobal, setLettersGlobal }: any = useContext(AppContext);
+  const win = lettersGlobal as Letter[];
 
   useEffect(() => {
     if (!lettersGlobal) {
@@ -22,7 +24,7 @@ const Letters = () => {
 
   return (
     <div className="container__letters">
-      {lettersGlobal &&
+      {lettersGlobal ? (
         lettersGlobal.map((letter: Letter) => {
           return (
             <LetterComponent
@@ -31,7 +33,10 @@ const Letters = () => {
               onClick={() => turnCard(letter)}
             />
           );
-        })}
+        })
+      ) : (
+        <img src={WinImg} alt="win" />
+      )}
     </div>
   );
 };
